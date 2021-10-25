@@ -58,4 +58,19 @@ public class Player : MonoBehaviour
         // then base on player's current position, project the bullet
         bullet.Project(this.transform.up);
     }
+
+    private void OnCollisionEnter2D (Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Asteroid")
+        {
+            // stop all movement when dies
+            _rigidbody2D.velocity = Vector3.zero;
+            _rigidbody2D.angularVelocity = 0.0f;
+
+            this.gameObject.SetActive(false);
+
+            // bad way since this function is really slow
+            FindObjectOfType<GameManager>().PlayerDied();
+        }
+    }
 }

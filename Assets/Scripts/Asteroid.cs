@@ -35,4 +35,35 @@ public class Asteroid : MonoBehaviour
         // destroy when timeout
         Destroy(this.gameObject, this.maxLifeTime);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // processing colliding with anything
+        // add Bullet tag in Unity first
+        if (collision.gameObject.tag == "Bullet")
+        {
+            // if the asteroid is big enough, split the asteroid
+            if (this.size * 0.5f >= this.minSize)
+            {
+                CreateSplit();
+                CreateSplit();
+            }
+
+            FindObjectOfType<GameManager>().AsteroidDestroyed(this);
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void CreateSplit ()
+    {
+        // offset the splits of the asteroid to feel more natural
+        Vector2 position = this.transform.position;
+        position += Random.insideUnitCircle * 0.5f;
+
+        Asteroid half = Instantiate(this, position, this.transform.rotation);
+        half.size = this.size * 0.5f;
+        // set the trajectory to be random
+        // keep the magnitude because it would affect the split's speed
+        half.SetTrajectory(Random.insideUnitCircle.normalized * this.speed);
+    }
 }
