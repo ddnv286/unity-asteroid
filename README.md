@@ -3,4 +3,4 @@ Asteroids is a space-themed multidirectional shooter arcade game designed by Lyl
 This project is Dave's first take as asteroids, in this game there's just asteroids, saucers not included.
 
 ## Screenshot
-![Asteroids Screenshots]()
+![Asteroids Screenshots](https://github.com/ddnv286/unity-asteroid/blob/main/Assets/Screenshots/asteroid_scrs.jpg?raw=true)
